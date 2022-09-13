@@ -8,25 +8,36 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MoviesController : Controller
     {
-        // GET: Movies
-        public ActionResult Random()
+
+        private VidlyContext _context;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public MoviesController()
         {
-            var movie = new Movie() { Name = "Shrek!" };
-            var customers = new List<Customer>
-            {
-                new Customer() { Name = "Customer 1" },
-                new Customer() { Name = "Customer 2" }
-            };
-
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
-
-            return View(viewModel);
+            _context = new VidlyContext();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        // GET: Movies
+        public ActionResult Index()
+        {
+            return View();
+        }
+
     }
 }
